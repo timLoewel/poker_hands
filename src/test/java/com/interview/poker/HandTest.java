@@ -23,7 +23,8 @@ public class HandTest extends TestCase {
         return new TestSuite(HandTest.class);
     }
 
-    public void testHighCard() {
+    // High Card
+    public void testHighCardVsHighCard() {
         Hand highCardSeven = new Hand(
                 twoOf(CLUBS),
                 threeOf(HEARTS),
@@ -40,7 +41,7 @@ public class HandTest extends TestCase {
         assertFalse(highCardSeven.isBetterThan(highCardAce));
     }
 
-    public void testHighCardNotSorted() {
+    public void testHighCardVsHighCardNotSorted() {
         Hand highCardSeven = new Hand(
                 sevenOf(CLUBS),
                 threeOf(HEARTS),
@@ -55,6 +56,111 @@ public class HandTest extends TestCase {
                 fourOf(CLUBS));
         assertTrue(highCardAce.isBetterThan(highCardSeven));
         assertFalse(highCardSeven.isBetterThan(highCardAce));
+    }
+
+    public void testHighCardVsHighCardLastCardDifferent() {
+        Hand highCardTwo = new Hand(
+                twoOf(CLUBS),
+                fourOf(DIAMONDS),
+                fiveOf(SPADES),
+                sevenOf(CLUBS),
+                eightOf(HEARTS));
+
+        Hand highCardThree = new Hand(
+                threeOf(CLUBS),
+                fourOf(DIAMONDS),
+                fiveOf(SPADES),
+                sevenOf(CLUBS),
+                eightOf(HEARTS));
+        assertTrue(highCardThree.isBetterThan(highCardTwo));
+        assertFalse(highCardTwo.isBetterThan(highCardThree));
+    }
+
+    public void testHighCardVsHighCardSameRank() {
+        Hand highCardTwo = new Hand(
+                twoOf(CLUBS),
+                fourOf(DIAMONDS),
+                fiveOf(SPADES),
+                sevenOf(CLUBS),
+                eightOf(HEARTS));
+
+        Hand highCardThree = new Hand(
+                twoOf(DIAMONDS),
+                fourOf(CLUBS),
+                fiveOf(HEARTS),
+                sevenOf(DIAMONDS),
+                eightOf(SPADES));
+        assertFalse(highCardThree.isBetterThan(highCardTwo));
+        assertFalse(highCardTwo.isBetterThan(highCardThree));
+    }
+
+    // Pair
+    public void testPairVsHighCard() {
+        Hand highCardSeven = new Hand(
+                sevenOf(CLUBS),
+                threeOf(HEARTS),
+                fourOf(DIAMONDS),
+                fiveOf(SPADES),
+                twoOf(CLUBS));
+        Hand pairOfThrees = new Hand(
+                threeOf(HEARTS),
+                threeOf(DIAMONDS),
+                fourOf(SPADES),
+                fiveOf(CLUBS),
+                aceOf(CLUBS));
+        assertTrue(pairOfThrees.isBetterThan(highCardSeven));
+        assertFalse(highCardSeven.isBetterThan(pairOfThrees));
+    }
+
+    public void testTwoDifferentPairs() {
+        Hand pairOfTwos = new Hand(
+                twoOf(CLUBS),
+                twoOf(HEARTS),
+                fourOf(DIAMONDS),
+                fiveOf(SPADES),
+                sevenOf(CLUBS));
+        Hand pairOfThrees = new Hand(
+                threeOf(HEARTS),
+                threeOf(DIAMONDS),
+                fourOf(SPADES),
+                fiveOf(CLUBS),
+                aceOf(CLUBS));
+        assertTrue(pairOfThrees.isBetterThan(pairOfTwos));
+        assertFalse(pairOfTwos.isBetterThan(pairOfThrees));
+    }
+
+    public void testTwoSamePairs() {
+        Hand pairOfTwosWithAce = new Hand(
+                twoOf(CLUBS),
+                twoOf(HEARTS),
+                fourOf(DIAMONDS),
+                fiveOf(SPADES),
+                aceOf(CLUBS));
+        Hand pairOfTwosWithKing = new Hand(
+                twoOf(HEARTS),
+                twoOf(DIAMONDS),
+                fourOf(SPADES),
+                fiveOf(CLUBS),
+                kingOf(CLUBS));
+        assertTrue(pairOfTwosWithAce.isBetterThan(pairOfTwosWithKing));
+        assertFalse(pairOfTwosWithKing.isBetterThan(pairOfTwosWithAce));
+    }
+
+    public void testTwoSameRank() {
+        Hand pairOfTwosWithAce = new Hand(
+                twoOf(CLUBS),
+                twoOf(HEARTS),
+                fourOf(DIAMONDS),
+                fiveOf(SPADES),
+                kingOf(HEARTS));
+        Hand pairOfTwosWithKing = new Hand(
+                twoOf(HEARTS),
+                twoOf(DIAMONDS),
+                fourOf(SPADES),
+                fiveOf(CLUBS),
+                kingOf(CLUBS));
+        assertFalse(pairOfTwosWithAce.isBetterThan(pairOfTwosWithKing));
+        assertFalse(pairOfTwosWithKing.isBetterThan(pairOfTwosWithAce));
     }
 
 }

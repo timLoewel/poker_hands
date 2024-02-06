@@ -1,6 +1,12 @@
 package com.interview.poker;
 
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import com.interview.poker.Card.CardValue;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -54,14 +60,16 @@ import java.util.Arrays;
  */
 public class Hand {
 
-    private final List<Card> hand;
+    private final List<Card> cards;
 
     /**
      * constructor which takes 5 cards, there is no Hand with a different number of
      * cards
      */
     public Hand(final Card card1, final Card card2, final Card card3, final Card card4, final Card card5) {
-        hand = Arrays.asList(card1, card2, card3, card4, card5);
+        var sortedCards = Arrays.asList(card1, card2, card3, card4, card5);
+        sortedCards.sort((c1, c2) -> c1.value.compareTo(c2.value));
+        cards = sortedCards;
     }
 
     /**
@@ -80,7 +88,35 @@ public class Hand {
      * 
      */
     protected String getRankingString() {
+        final var pairRankingString = createPairRankingString();
+        if (pairRankingString != null) {
+            return pairRankingString;
+        }
+
         return createHighCardRankingString();
+    }
+
+    private String createPairRankingString() {
+        // cards with the same value follow each other, as the cards are sorted by value
+        CardValue lastValue = null;
+        CardValue pairCardValue = null;
+
+        for (Card card : cards) {
+            if (card.value == lastValue) {
+                pairCardValue = card.value;
+                break; // do not look further, tripples and two pairs are handled elsewhere
+            } else {
+                lastValue = card.value;
+            }
+        }
+
+        if (pairCardValue == null) {
+            return null;
+        }
+        final var cardsWithoutPair = new ArrayList<>(cards);
+        final var removeAllCardsWithThisValue = pairCardValue; // final for lambda
+        cardsWithoutPair.removeIf(card -> card.value == removeAllCardsWithThisValue);
+        return "b" + pairCardValue.rank + createHighCardRankingString(cardsWithoutPair);
     }
 
     /**
@@ -91,10 +127,12 @@ public class Hand {
      * @return
      */
     private String createHighCardRankingString() {
-        final List<Card> sortedHand = new ArrayList<>(hand);
-        sortedHand.sort((c1, c2) -> c2.value.compareTo(c1.value));
+        return createHighCardRankingString(cards);
+    }
+
+    private String createHighCardRankingString(List<Card> cards) {
         final StringBuilder sb = new StringBuilder("a");
-        for (final Card card : sortedHand) {
+        for (final Card card : cards) {
             sb.append(card.value.rank);
         }
         return sb.toString();
@@ -115,6 +153,8 @@ public class Hand {
 
     /**
      * convenience function
+     * 
+     * @return true if this hand is better than the other hand, false otherwise
      */
     public boolean isBetterThan(final Hand otherHand) {
         return this.compareToHand(otherHand) > 0;
