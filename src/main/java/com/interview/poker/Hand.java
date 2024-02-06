@@ -6,7 +6,10 @@ import java.util.Arrays;
 
 /**
  * A poker hand of 5 cards
- * it can be compared to other hands
+ * it can be compared to other hands.
+ * We assume that there are no duplicate cards, neither in one hand nor in
+ * different hands.
+ * 
  * 
  * these are the rules of ranking two hands:
  * A poker hand consists of 5 cards dealt from the deck. Poker hands are ranked

@@ -31,10 +31,10 @@ public class HandTest extends TestCase {
                 fiveOf(SPADES),
                 sevenOf(CLUBS));
         Hand highCardAce = new Hand(
-                twoOf(CLUBS),
-                threeOf(HEARTS),
-                fourOf(DIAMONDS),
-                fiveOf(SPADES),
+                twoOf(HEARTS),
+                threeOf(DIAMONDS),
+                fourOf(SPADES),
+                fiveOf(CLUBS),
                 aceOf(CLUBS));
         assertTrue(highCardAce.isBetterThan(highCardSeven));
     }
@@ -47,10 +47,10 @@ public class HandTest extends TestCase {
                 fiveOf(SPADES),
                 twoOf(CLUBS));
         Hand highCardAce = new Hand(
-                threeOf(CLUBS),
-                twoOf(HEARTS),
-                aceOf(DIAMONDS),
-                fiveOf(SPADES),
+                threeOf(HEARTS),
+                twoOf(CLUBS),
+                aceOf(SPADES),
+                fiveOf(DIAMONDS),
                 fourOf(CLUBS));
         assertTrue(highCardAce.isBetterThan(highCardSeven));
     }
