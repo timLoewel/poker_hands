@@ -37,6 +37,7 @@ public class HandTest extends TestCase {
                 fiveOf(CLUBS),
                 aceOf(CLUBS));
         assertTrue(highCardAce.isBetterThan(highCardSeven));
+        assertFalse(highCardSeven.isBetterThan(highCardAce));
     }
 
     public void testHighCardNotSorted() {
@@ -53,6 +54,7 @@ public class HandTest extends TestCase {
                 fiveOf(DIAMONDS),
                 fourOf(CLUBS));
         assertTrue(highCardAce.isBetterThan(highCardSeven));
+        assertFalse(highCardSeven.isBetterThan(highCardAce));
     }
 
 }
