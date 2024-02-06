@@ -32,3 +32,6 @@ dependency-reduced-pom.xml
 *.idea
 
 README.html
+
+# vscode files
+.history
