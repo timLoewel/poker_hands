@@ -44,6 +44,10 @@ public class Card {
         this.value = value;
     }
 
+    public String toString() {
+        return value + " of " + suit;
+    }
+
     // Factory methods for creating cards
     public static Card twoOf(final CardSuit suit) {
         return new Card(suit, CardValue.TWO);
