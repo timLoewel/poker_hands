@@ -8,19 +8,19 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /** Unit test for Hand validation */
-public class CardTest extends TestCase {
+public class HandTest extends TestCase {
     /**
      * Create the test case
      *
      * @param testName name of the test case
      */
-    public CardTest(String testName) {
+    public HandTest(String testName) {
         super(testName);
     }
 
     /** @return the suite of tests being tested */
     public static Test suite() {
-        return new TestSuite(CardTest.class);
+        return new TestSuite(HandTest.class);
     }
 
     public void testHighCard() {
@@ -54,4 +54,5 @@ public class CardTest extends TestCase {
                 fourOf(CLUBS));
         assertTrue(highCardAce.isBetterThan(highCardSeven));
     }
+
 }
