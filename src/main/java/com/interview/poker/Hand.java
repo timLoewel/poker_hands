@@ -63,6 +63,8 @@ public class Hand {
     private static final String HIGH_CARD_RANK = "a";
     private static final String PAIR_RANK = "b";
     private static final String TWO_PAIRS_RANK = "c";
+    private static final String THREE_OF_A_KIND_RANK = "d";
+
     /**
      * the cards in the hand, sorted by value, high to low
      */
@@ -118,8 +120,13 @@ public class Hand {
      * 
      */
     protected String getRankingString() {
-        // we start with the best hand and go down to the worst
+        // we start with the best hand and go down to the worst, if a type of hand is
+        // found, we return the string
 
+        final var threeOfAKindRankingString = createThreeOfAKindRankingString();
+        if (threeOfAKindRankingString != null) {
+            return threeOfAKindRankingString;
+        }
         final var twoPairsRankingString = createTwoPairsRankingString();
         if (twoPairsRankingString != null) {
             return twoPairsRankingString;
@@ -131,6 +138,32 @@ public class Hand {
         }
 
         return createHighCardRankingString();
+    }
+
+    private String createThreeOfAKindRankingString() {
+        // cards with the same value follow each other, as the cards are sorted by value
+        CardValue lastValue = null;
+        int numFound = 0;
+
+        for (Card card : cards) {
+            if (card.value == lastValue) {
+                ++numFound;
+                if (numFound == 3) {
+                    break;
+                }
+            } else {
+                lastValue = card.value;
+                numFound = 1;
+            }
+        }
+
+        if (numFound < 3) {
+            return null;
+        }
+        final var cardsWithoutThreeOfAKind = new ArrayList<>(cards);
+        final var removeAllCardsWithThisValue = lastValue; // final for lambda
+        cardsWithoutThreeOfAKind.removeIf(card -> card.value == removeAllCardsWithThisValue);
+        return THREE_OF_A_KIND_RANK + lastValue.rank + createHighCardRankingString(cardsWithoutThreeOfAKind);
     }
 
     protected String createTwoPairsRankingString() {
@@ -152,7 +185,7 @@ public class Hand {
         }
 
         if (pair2CardValue == null) {
-            // only one pair found
+            // only one or zero pairs found
             return null;
         }
         final var cardsWithoutPair = new ArrayList<>(cards);
@@ -168,24 +201,22 @@ public class Hand {
     private String createPairRankingString() {
         // cards with the same value follow each other, as the cards are sorted by value
         CardValue lastValue = null;
-        CardValue pairCardValue = null;
-
+        boolean found = false;
         for (Card card : cards) {
             if (card.value == lastValue) {
-                pairCardValue = card.value;
+                found = true;
                 break; // do not look further, tripples and two pairs are handled elsewhere
             } else {
                 lastValue = card.value;
             }
         }
-
-        if (pairCardValue == null) {
+        if (!found) {
             return null;
         }
         final var cardsWithoutPair = new ArrayList<>(cards);
-        final var removeAllCardsWithThisValue = pairCardValue; // final for lambda
+        final var removeAllCardsWithThisValue = lastValue; // final for lambda
         cardsWithoutPair.removeIf(card -> card.value == removeAllCardsWithThisValue);
-        return PAIR_RANK + pairCardValue.rank + createHighCardRankingString(cardsWithoutPair);
+        return PAIR_RANK + lastValue.rank + createHighCardRankingString(cardsWithoutPair);
     }
 
     /**
