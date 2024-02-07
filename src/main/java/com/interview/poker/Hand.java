@@ -159,4 +159,8 @@ public class Hand {
     public boolean isBetterThan(final Hand otherHand) {
         return this.compareToHand(otherHand) > 0;
     }
+
+    public String toString() {
+        return cards.toString();
+    }
 }
