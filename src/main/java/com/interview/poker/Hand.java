@@ -14,7 +14,7 @@ import java.util.Arrays;
  * A poker hand of 5 cards
  * it can be compared to other hands.
  * We assume that there are no duplicate cards, neither in one hand nor in
- * different hands.
+ * different hands. This is not checked anwhere in the code.
  * 
  * 
  * these are the rules of ranking two hands:
@@ -60,6 +60,9 @@ import java.util.Arrays;
  */
 public class Hand {
 
+    /**
+     * the cards in the hand, sorted by value, high to low
+     */
     private final List<Card> cards;
 
     /**
@@ -68,26 +71,52 @@ public class Hand {
      */
     public Hand(final Card card1, final Card card2, final Card card3, final Card card4, final Card card5) {
         var sortedCards = Arrays.asList(card1, card2, card3, card4, card5);
-        sortedCards.sort((c1, c2) -> c1.value.compareTo(c2.value));
+        sortedCards.sort((c1, c2) -> -c1.value.compareTo(c2.value));
         cards = sortedCards;
     }
 
     /**
-     * Algorithm idea:
+     * compare this hand to another hand (we do not use compareTo as we do not want
+     * to override equals and hashcode)
+     * 
+     * * Algorithm idea:
      * Get a string value for the hand, we can then use string alphabetical order to
      * compare two hands.
      * A string that is later in the alphabetical order is that of a better hand
      * String creation follows the ranking rules described above.
      * 
-     * The category is the first character of the string. With "High Card" being 'a'
-     * and "Straight Flush" being 'i' these characters have been chosen for their
-     * alphabetic order.
+     * The category is the first character of the string. With "High Card" being
+     * 'a', Pair being 'b',
+     * "Two Pairs" being 'c' etc
      * 
      * Ranking within the category is done according to the rules of the category
-     * via substrings.
+     * via concatenated substrings.
+     * 
+     * @param otherHand the hand to compare to
+     * @return > 0 if this hand is better, 0 if they are equal, < 0 if the other
+     *         hand
+     *         is better
+     */
+    public int compareToHand(final Hand otherHand) {
+        return this.getRankingString().compareTo(otherHand.getRankingString());
+    }
+
+    /**
+     * convenience function
+     * 
+     * @return true if this hand is better than the other hand, false otherwise
+     */
+    public boolean isBetterThan(final Hand otherHand) {
+        return this.compareToHand(otherHand) > 0;
+    }
+
+    /**
+     * calculate the rankin string from the cards
      * 
      */
     protected String getRankingString() {
+        // we start with the best hand and go down to the worst
+
         final var pairRankingString = createPairRankingString();
         if (pairRankingString != null) {
             return pairRankingString;
@@ -136,28 +165,6 @@ public class Hand {
             sb.append(card.value.rank);
         }
         return sb.toString();
-    }
-
-    /**
-     * compare this hand to another hand (we do not use compareTo as we do not want
-     * to override equals and hashcode)
-     * 
-     * @param otherHand the hand to compare to
-     * @return > 0 if this hand is better, 0 if they are equal, < 0 if the other
-     *         hand
-     *         is better
-     */
-    public int compareToHand(final Hand otherHand) {
-        return this.getRankingString().compareTo(otherHand.getRankingString());
-    }
-
-    /**
-     * convenience function
-     * 
-     * @return true if this hand is better than the other hand, false otherwise
-     */
-    public boolean isBetterThan(final Hand otherHand) {
-        return this.compareToHand(otherHand) > 0;
     }
 
     public String toString() {
