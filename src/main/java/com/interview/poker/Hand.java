@@ -60,6 +60,9 @@ import java.util.Arrays;
  */
 public class Hand {
 
+    private static final String HIGH_CARD_RANK = "a";
+    private static final String PAIR_RANK = "b";
+    private static final String TWO_PAIRS_RANK = "c";
     /**
      * the cards in the hand, sorted by value, high to low
      */
@@ -117,12 +120,49 @@ public class Hand {
     protected String getRankingString() {
         // we start with the best hand and go down to the worst
 
+        final var twoPairsRankingString = createTwoPairsRankingString();
+        if (twoPairsRankingString != null) {
+            return twoPairsRankingString;
+        }
+
         final var pairRankingString = createPairRankingString();
         if (pairRankingString != null) {
             return pairRankingString;
         }
 
         return createHighCardRankingString();
+    }
+
+    protected String createTwoPairsRankingString() {
+        // cards with the same value follow each other, as the cards are sorted by value
+        CardValue lastValue = null;
+        CardValue pair1CardValue = null;
+        CardValue pair2CardValue = null;
+        for (Card card : cards) {
+            if (card.value == lastValue) {
+                if (pair1CardValue == null) {
+                    pair1CardValue = card.value;
+                } else {
+                    pair2CardValue = card.value;
+                    break; // do not look further, tripples are handled elsewhere
+                }
+            } else {
+                lastValue = card.value;
+            }
+        }
+
+        if (pair2CardValue == null) {
+            // only one pair found
+            return null;
+        }
+        final var cardsWithoutPair = new ArrayList<>(cards);
+        final var removeAllCardsWithPair1Value = pair1CardValue; // final for lambda
+        cardsWithoutPair.removeIf(card -> card.value == removeAllCardsWithPair1Value);
+        final var removeAllCardsWithPair2Value = pair2CardValue; // final for lambda
+        cardsWithoutPair.removeIf(card -> card.value == removeAllCardsWithPair2Value);
+        // pair1 has higher value than pair2, as they were sorted by value
+        return TWO_PAIRS_RANK + pair1CardValue.rank + pair2CardValue.rank
+                + createHighCardRankingString(cardsWithoutPair);
     }
 
     private String createPairRankingString() {
@@ -145,7 +185,7 @@ public class Hand {
         final var cardsWithoutPair = new ArrayList<>(cards);
         final var removeAllCardsWithThisValue = pairCardValue; // final for lambda
         cardsWithoutPair.removeIf(card -> card.value == removeAllCardsWithThisValue);
-        return "b" + pairCardValue.rank + createHighCardRankingString(cardsWithoutPair);
+        return PAIR_RANK + pairCardValue.rank + createHighCardRankingString(cardsWithoutPair);
     }
 
     /**
@@ -156,11 +196,11 @@ public class Hand {
      * @return
      */
     private String createHighCardRankingString() {
-        return createHighCardRankingString(cards);
+        return HIGH_CARD_RANK + createHighCardRankingString(cards);
     }
 
     private String createHighCardRankingString(List<Card> cards) {
-        final StringBuilder sb = new StringBuilder("a");
+        final StringBuilder sb = new StringBuilder();
         for (final Card card : cards) {
             sb.append(card.value.rank);
         }

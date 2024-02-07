@@ -50,6 +50,24 @@ public class HandTest {
         }
 
         @Test
+        public void testRankingStringSortingOrder() {
+                Hand winningHand = new Hand(
+                                twoOf(HEARTS),
+                                threeOf(CLUBS),
+                                fourOf(DIAMONDS),
+                                fiveOf(CLUBS),
+                                kingOf(CLUBS));
+                Hand losingHand = new Hand(
+                                threeOf(HEARTS),
+                                fourOf(DIAMONDS),
+                                fiveOf(SPADES),
+                                sixOf(CLUBS),
+                                sevenOf(CLUBS));
+
+                assertTrue(winningHand.isBetterThan(losingHand));
+        }
+
+        @Test
         public void testHighCardVsHighCardSameRank() {
                 Hand highCardTwo = new Hand(
                                 twoOf(CLUBS),

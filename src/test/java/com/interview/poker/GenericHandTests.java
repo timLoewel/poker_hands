@@ -50,28 +50,23 @@ public class GenericHandTests {
      */
     private final static Hand[] sampleHands = {
             // high card
-            new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)), // 0
-            new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sevenOf(CLUBS)), // 1
-            new Hand(threeOf(CLUBS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS), sevenOf(CLUBS)), // 2
-            new Hand(threeOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), sixOf(SPADES), aceOf(CLUBS)), // 4
-            new Hand(tenOf(CLUBS), jackOf(HEARTS), queenOf(DIAMONDS), kingOf(SPADES), aceOf(CLUBS)), // 3
+            new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
+            new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sevenOf(CLUBS)),
+            new Hand(threeOf(CLUBS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS), sevenOf(CLUBS)),
+            new Hand(threeOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), sixOf(SPADES), aceOf(CLUBS)),
+            new Hand(tenOf(CLUBS), jackOf(HEARTS), queenOf(DIAMONDS), kingOf(SPADES), aceOf(CLUBS)),
             // pair
-            new Hand(twoOf(CLUBS), twoOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)), // 5
-            new Hand(twoOf(CLUBS), twoOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sevenOf(CLUBS)), // 6
-            new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)), // 7
-            new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sevenOf(CLUBS)), // 8
-            new Hand(fourOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), sixOf(SPADES), sevenOf(CLUBS)), // 9
+            new Hand(twoOf(CLUBS), twoOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
+            new Hand(twoOf(CLUBS), twoOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sevenOf(CLUBS)),
+            new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
+            new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sevenOf(CLUBS)),
+            new Hand(fourOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), sixOf(SPADES), sevenOf(CLUBS)),
             // two pairs
-            // new Hand(twoOf(CLUBS), twoOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES),
-            // fourOf(CLUBS)), // 10
-            // new Hand(twoOf(CLUBS), twoOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES),
-            // fiveOf(CLUBS)), // 11
-            // new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES),
-            // fiveOf(CLUBS)), // 12
-            // new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES),
-            // sixOf(CLUBS)), // 13
-            // new Hand(fourOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), fiveOf(SPADES),
-            // sixOf(CLUBS)), // 14
+            new Hand(twoOf(CLUBS), twoOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES), fourOf(CLUBS)),
+            new Hand(twoOf(CLUBS), twoOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES), fiveOf(CLUBS)),
+            new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES), fiveOf(CLUBS)),
+            new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES), sixOf(CLUBS)),
+            new Hand(fourOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
             // three of a kind
             // new Hand(twoOf(CLUBS), twoOf(HEARTS), twoOf(DIAMONDS), threeOf(SPADES),
             // fourOf(CLUBS)),
