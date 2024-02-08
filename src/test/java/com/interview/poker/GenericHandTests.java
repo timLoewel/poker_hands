@@ -1,7 +1,22 @@
 package com.interview.poker;
 
-import static com.interview.poker.Card.*;
-import static com.interview.poker.Card.CardSuit.*;
+import static com.interview.poker.Card.aceOf;
+import static com.interview.poker.Card.eightOf;
+import static com.interview.poker.Card.fiveOf;
+import static com.interview.poker.Card.fourOf;
+import static com.interview.poker.Card.jackOf;
+import static com.interview.poker.Card.kingOf;
+import static com.interview.poker.Card.nineOf;
+import static com.interview.poker.Card.queenOf;
+import static com.interview.poker.Card.sevenOf;
+import static com.interview.poker.Card.sixOf;
+import static com.interview.poker.Card.tenOf;
+import static com.interview.poker.Card.threeOf;
+import static com.interview.poker.Card.twoOf;
+import static com.interview.poker.Card.CardSuit.CLUBS;
+import static com.interview.poker.Card.CardSuit.DIAMONDS;
+import static com.interview.poker.Card.CardSuit.HEARTS;
+import static com.interview.poker.Card.CardSuit.SPADES;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -16,11 +31,11 @@ import org.junit.jupiter.params.provider.MethodSource;
 /**
  * compares all combinations hands and checks if the comparison is correct
  */
-public class GenericHandTests {
+class GenericHandTests {
 
     @ParameterizedTest
     @MethodSource("provideAllHandCombinations")
-    public void testCompareHands(Hand losingHand, Hand winningHand, int indexLoser, int indexWinner) {
+    void testCompareHands(Hand losingHand, Hand winningHand, int indexLoser, int indexWinner) {
         assertTrue(winningHand.isBetterThan(losingHand),
                 "expected \n\t" + indexWinner + winningHand + "\n" + winningHand.getRankingString()
                         + "\nto be better than\n\t" + indexLoser

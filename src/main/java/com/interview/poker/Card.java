@@ -37,8 +37,8 @@ public class Card {
 
     }
 
-    final public CardSuit suit;
-    final public CardValue value;
+    public final CardSuit suit;
+    public final CardValue value;
 
     public Card(final CardSuit suit, final CardValue value) {
         this.suit = suit;

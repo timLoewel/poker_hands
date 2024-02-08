@@ -41,7 +41,7 @@ public class Hand {
      */
     public Hand(final Card card1, final Card card2, final Card card3, final Card card4, final Card card5) {
         var sortedCards = Arrays.asList(card1, card2, card3, card4, card5);
-        sortedCards.sort((c1, c2) -> -c1.value.compareTo(c2.value));
+        sortedCards.sort((c1, c2) -> c2.value.rank - c1.value.rank);
         cards = sortedCards;
         rankingString = computeRankingString();
     }
@@ -231,9 +231,8 @@ public class Hand {
             if (card.value == lastValue) {
                 found = true;
                 break; // do not look further, tripples and two pairs are handled elsewhere
-            } else {
-                lastValue = card.value;
             }
+            lastValue = card.value;
         }
         if (!found) {
             return null;

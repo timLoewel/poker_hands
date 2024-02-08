@@ -22,10 +22,10 @@ import org.junit.jupiter.api.Test;
  * Specific tests for Hand validation
  * the bunch of the tests are in the GenericHandTests class
  */
-public class HandTest {
+class HandTest {
 
         @Test
-        public void testRankingStringSorting() {
+        void testRankingStringSorting() {
                 final Hand hand = new Hand(
                                 twoOf(CLUBS),
                                 threeOf(HEARTS),
@@ -42,7 +42,7 @@ public class HandTest {
         }
 
         @Test
-        public void testRankingStringSortingOrder() {
+        void testRankingStringSortingOrder() {
                 final Hand winningHand = new Hand(
                                 twoOf(HEARTS),
                                 threeOf(CLUBS),
@@ -60,7 +60,7 @@ public class HandTest {
         }
 
         @Test
-        public void testHighCardVsHighCardSameRank() {
+        void testHighCardVsHighCardSameRank() {
                 final Hand highCardTwo = new Hand(
                                 twoOf(CLUBS),
                                 fourOf(DIAMONDS),
@@ -79,7 +79,7 @@ public class HandTest {
         }
 
         @Test
-        public void testPairSameRank() {
+        void testPairSameRank() {
                 final Hand pairOfTwosWithAce = new Hand(
                                 twoOf(CLUBS),
                                 twoOf(HEARTS),
@@ -97,7 +97,7 @@ public class HandTest {
         }
 
         @Test
-        public void testStraightString() {
+        void testStraightString() {
                 final Hand straight = new Hand(
                                 twoOf(CLUBS),
                                 threeOf(HEARTS),
