@@ -172,19 +172,10 @@ public class Hand {
     }
 
     private String createStraightFlushRankingString() {
-        CardValue lastValue = null;
-        final CardValue highestValue = cards.get(0).value;
-        final var suit = cards.get(0).suit;
-        for (Card card : cards) {
-            if (card.suit != suit) {
-                return null;
-            }
-            if (lastValue != null && card.value.rank != lastValue.rank - 1) {
-                return null;
-            }
-            lastValue = card.value;
+        if (createFlushRankingString() != null && createStraightRankingString() != null) {
+            return STRAIGHT_FLUSH_RANK + cards.get(0).value.rank;
         }
-        return STRAIGHT_FLUSH_RANK + highestValue.rank;
+        return null;
     }
 
     private String createFourOfAKindRankingString() {
