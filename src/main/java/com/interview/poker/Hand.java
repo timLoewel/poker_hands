@@ -16,44 +16,6 @@ import java.util.Arrays;
  * We assume that there are no duplicate cards, neither in one hand nor in
  * different hands. This is not checked anwhere in the code.
  * 
- * 
- * these are the rules of ranking two hands:
- * A poker hand consists of 5 cards dealt from the deck. Poker hands are ranked
- * by the following partial order from lowest to highest.
- * 
- * Categories:
- * 
- * High Card: Hands which do not fit any higher category are ranked by the
- * value of their highest card. If the highest cards have the same value, the
- * hands are ranked by the next highest, and so on.
- * 
- * Pair: 2 of the 5 cards in the hand have the same value. Hands which both
- * contain a pair are ranked by the value of the cards forming the pair. If
- * these values are the same, the hands are ranked by the values of the cards
- * not forming the pair, in decreasing order.
- * 
- * Two Pairs: The hand contains 2 different pairs. Hands which both contain 2
- * pairs are ranked by the value of their highest pair. Hands with the same
- * highest pair are ranked by the value of their other pair. If these values are
- * the same the hands are ranked by the value of the remaining card.
- * 
- * Three of a Kind: Three of the cards in the hand have the same value. Hands
- * which both contain three of a kind are ranked by the value of the 3 cards.
- * 
- * Straight: Hand contains 5 cards with consecutive values. Hands which both
- * contain a straight are ranked by their highest card.
- * 
- * Flush: Hand contains 5 cards of the same suit. Hands which are both
- * flushes are ranked using the rules for High Card.
- * 
- * Full House: 3 cards of the same value, with the remaining 2 cards forming
- * a pair. Ranked by the value of the 3 cards.
- * 
- * Four of a kind: 4 cards with the same value. Ranked by the value of the 4
- * cards.
- * 
- * Straight flush: 5 cards of the same suit with consecutive values. Ranked
- * by he highest card in the hand.
  */
 public class Hand {
 
@@ -78,8 +40,7 @@ public class Hand {
     private final String rankingString;
 
     /**
-     * constructor which takes 5 cards, there is no Hand with a different number of
-     * cards
+     * constructor which takes 5 cards, all poker hands take exactly 5 cards
      */
     public Hand(final Card card1, final Card card2, final Card card3, final Card card4, final Card card5) {
         var sortedCards = Arrays.asList(card1, card2, card3, card4, card5);
@@ -89,10 +50,10 @@ public class Hand {
     }
 
     /**
-     * compare this hand to another hand (we do not use compareTo as we do not want
+     * Compare this hand to another hand (we do not use compareTo as we do not want
      * to override equals and hashcode)
      * 
-     * * Algorithm idea:
+     * Algorithm idea:
      * Get a string value for the hand, we can then use string alphabetical order to
      * compare two hands.
      * A string that is later in the alphabetical order is that of a better hand
@@ -124,7 +85,6 @@ public class Hand {
 
     /**
      * calculate the rankin string from the cards
-     * 
      */
     private String computeRankingString() {
         // we start with the best hand and go down to the worst, if a type of hand is
@@ -310,7 +270,7 @@ public class Hand {
         return cards.toString();
     }
 
-    public String getRankingString() {
+    protected String getRankingString() {
         return rankingString;
     }
 }
