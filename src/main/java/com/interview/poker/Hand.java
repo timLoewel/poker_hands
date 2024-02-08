@@ -64,6 +64,7 @@ public class Hand {
     private static final String STRAIGHT_CARD_RANK = "e";
     private static final String FLUSH_RANK = "f";
     private static final String FULL_HOUSE_RANK = "g";
+    private static final String FOUR_OF_A_KIND_RANK = "h";
 
     /**
      * the cards in the hand, sorted by value, high to low
@@ -129,6 +130,11 @@ public class Hand {
         // we start with the best hand and go down to the worst, if a type of hand is
         // found, we return the string
 
+        final var fourOfAKindRankingString = createFourOfAKindRankingString();
+        if (fourOfAKindRankingString != null) {
+            return fourOfAKindRankingString;
+        }
+
         final var fullHouseRankingString = createFullHouseRankingString();
         if (fullHouseRankingString != null) {
             return fullHouseRankingString;
@@ -157,6 +163,24 @@ public class Hand {
         }
 
         return createHighCardRankingString();
+    }
+
+    private String createFourOfAKindRankingString() {
+        // cards with the same value follow each other, as the cards are sorted by value
+        CardValue lastValue = null;
+        int numFound = 0;
+        for (Card card : cards) {
+            if (card.value == lastValue) {
+                ++numFound;
+            } else {
+                lastValue = card.value;
+                numFound = 1;
+            }
+            if (numFound == 4) {
+                return FOUR_OF_A_KIND_RANK + lastValue.rank;
+            }
+        }
+        return null;
     }
 
     private String createFullHouseRankingString() {
