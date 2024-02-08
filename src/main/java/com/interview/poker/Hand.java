@@ -200,39 +200,16 @@ public class Hand {
     }
 
     private String createFullHouseRankingString() {
-        // cards with the same value follow each other, as the cards are sorted by value
-        CardValue lastValue = null;
-        int numFound = 0;
-        boolean foundPair = false;
-        boolean foundThreeOfAKind = false;
-        CardValue pairCardValue = null;
-        CardValue threeOfAKindCardValue = null;
-
-        for (Card card : cards) {
-            if (card.value == lastValue) {
-                ++numFound;
-                if (numFound == 3) {
-                    foundThreeOfAKind = true;
-                    threeOfAKindCardValue = card.value;
-                    if (pairCardValue == threeOfAKindCardValue) {
-                        pairCardValue = null; // reset pair, as it is part of the three
-                        foundPair = false;
-                    }
-                } else if (numFound == 2 && !foundPair) {
-                    // if three comes after pair, we do not want to reset the pair
-                    foundPair = true;
-                    pairCardValue = card.value;
-                }
-            } else {
-                lastValue = card.value;
-                numFound = 1;
-            }
+        if (cards.get(0).value == cards.get(2).value && cards.get(3).value == cards.get(4).value) {
+            // first three and last two are the same
+            return FULL_HOUSE_RANK + cards.get(0).value.rank;
+        }
+        if (cards.get(0).value == cards.get(1).value && cards.get(2).value == cards.get(4).value) {
+            // first two and last three are the same
+            return FULL_HOUSE_RANK + cards.get(2).value.rank;
         }
 
-        if (!foundPair || !foundThreeOfAKind) {
-            return null;
-        }
-        return FULL_HOUSE_RANK + threeOfAKindCardValue.rank;
+        return null;
     }
 
     private String createFlushRankingString() {
