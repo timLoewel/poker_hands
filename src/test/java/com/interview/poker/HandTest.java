@@ -17,13 +17,13 @@ public class HandTest {
 
         @Test
         public void testRankingStringSorting() {
-                Hand hand = new Hand(
+                final Hand hand = new Hand(
                                 twoOf(CLUBS),
                                 threeOf(HEARTS),
                                 fourOf(DIAMONDS),
                                 fiveOf(SPADES),
                                 sevenOf(CLUBS));
-                Hand sameHandDifferentSorting = new Hand(
+                final Hand sameHandDifferentSorting = new Hand(
                                 threeOf(HEARTS),
                                 fiveOf(SPADES),
                                 fourOf(DIAMONDS),
@@ -34,13 +34,13 @@ public class HandTest {
 
         @Test
         public void testRankingStringSortingOrder() {
-                Hand winningHand = new Hand(
+                final Hand winningHand = new Hand(
                                 twoOf(HEARTS),
                                 threeOf(CLUBS),
                                 fourOf(DIAMONDS),
                                 fiveOf(CLUBS),
                                 kingOf(CLUBS));
-                Hand losingHand = new Hand(
+                final Hand losingHand = new Hand(
                                 threeOf(HEARTS),
                                 fourOf(DIAMONDS),
                                 fiveOf(SPADES),
@@ -52,14 +52,14 @@ public class HandTest {
 
         @Test
         public void testHighCardVsHighCardSameRank() {
-                Hand highCardTwo = new Hand(
+                final Hand highCardTwo = new Hand(
                                 twoOf(CLUBS),
                                 fourOf(DIAMONDS),
                                 fiveOf(SPADES),
                                 sevenOf(CLUBS),
                                 eightOf(HEARTS));
 
-                Hand highCardThree = new Hand(
+                final Hand highCardThree = new Hand(
                                 twoOf(DIAMONDS),
                                 fourOf(CLUBS),
                                 fiveOf(HEARTS),
@@ -71,13 +71,13 @@ public class HandTest {
 
         @Test
         public void testPairSameRank() {
-                Hand pairOfTwosWithAce = new Hand(
+                final Hand pairOfTwosWithAce = new Hand(
                                 twoOf(CLUBS),
                                 twoOf(HEARTS),
                                 fourOf(DIAMONDS),
                                 fiveOf(SPADES),
                                 kingOf(HEARTS));
-                Hand pairOfTwosWithKing = new Hand(
+                final Hand pairOfTwosWithKing = new Hand(
                                 twoOf(HEARTS),
                                 twoOf(DIAMONDS),
                                 fourOf(SPADES),
@@ -89,13 +89,13 @@ public class HandTest {
 
         @Test
         public void testStraightString() {
-                Hand straight = new Hand(
+                final Hand straight = new Hand(
                                 twoOf(CLUBS),
                                 threeOf(HEARTS),
                                 fourOf(DIAMONDS),
                                 fiveOf(SPADES),
                                 sixOf(CLUBS));
-                Hand pairOfTwosWithKing = new Hand(
+                final Hand pairOfTwosWithKing = new Hand(
                                 twoOf(HEARTS),
                                 twoOf(DIAMONDS),
                                 fourOf(SPADES),
