@@ -61,10 +61,11 @@ public class Hand {
     private static final String PAIR_RANK = "b";
     private static final String TWO_PAIRS_RANK = "c";
     private static final String THREE_OF_A_KIND_RANK = "d";
-    private static final String STRAIGHT_CARD_RANK = "e";
+    private static final String STRAIGHT_RANK = "e";
     private static final String FLUSH_RANK = "f";
     private static final String FULL_HOUSE_RANK = "g";
     private static final String FOUR_OF_A_KIND_RANK = "h";
+    private static final String STRAIGHT_FLUSH_RANK = "i";
 
     /**
      * the cards in the hand, sorted by value, high to low
@@ -130,6 +131,11 @@ public class Hand {
         // we start with the best hand and go down to the worst, if a type of hand is
         // found, we return the string
 
+        final var straightFlushRankingString = createStraightFlushRankingString();
+        if (straightFlushRankingString != null) {
+            return straightFlushRankingString;
+        }
+
         final var fourOfAKindRankingString = createFourOfAKindRankingString();
         if (fourOfAKindRankingString != null) {
             return fourOfAKindRankingString;
@@ -163,6 +169,22 @@ public class Hand {
         }
 
         return createHighCardRankingString();
+    }
+
+    private String createStraightFlushRankingString() {
+        CardValue lastValue = null;
+        final CardValue highestValue = cards.get(0).value;
+        final var suit = cards.get(0).suit;
+        for (Card card : cards) {
+            if (card.suit != suit) {
+                return null;
+            }
+            if (lastValue != null && card.value.rank != lastValue.rank - 1) {
+                return null;
+            }
+            lastValue = card.value;
+        }
+        return STRAIGHT_FLUSH_RANK + highestValue.rank;
     }
 
     private String createFourOfAKindRankingString() {
@@ -238,7 +260,7 @@ public class Hand {
             }
             lastValue = card.value;
         }
-        return STRAIGHT_CARD_RANK + highestValue.rank;
+        return STRAIGHT_RANK + highestValue.rank;
     }
 
     private String createThreeOfAKindRankingString() {
