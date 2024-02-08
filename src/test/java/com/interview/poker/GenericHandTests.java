@@ -47,9 +47,9 @@ public class GenericHandTests {
      * for every type of hand there is a hand with the lowest possible rank and
      * another hand with the highest possible rank
      * 
-     * For the comparison of two hands, it does not matter, if the two hands could
+     * For the comparison of most hands, it does not matter, if the two hands could
      * be drawn from the same deck. So several cards of the same Suit and Value are
-     * allowed here.
+     * allowed most of the time.
      */
     private final static Hand[] sampleHands = {
             // high card
@@ -59,7 +59,7 @@ public class GenericHandTests {
             new Hand(threeOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), sixOf(SPADES), aceOf(CLUBS)),
             new Hand(nineOf(CLUBS), jackOf(HEARTS), queenOf(DIAMONDS), kingOf(SPADES), aceOf(CLUBS)),
             // pair
-            new Hand(twoOf(CLUBS), twoOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
+            new Hand(twoOf(CLUBS), twoOf(HEARTS), threeOf(DIAMONDS), fourOf(SPADES), fiveOf(CLUBS)),
             new Hand(twoOf(CLUBS), twoOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sevenOf(CLUBS)),
             new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
             new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sevenOf(CLUBS)),
@@ -73,7 +73,7 @@ public class GenericHandTests {
             new Hand(fourOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
             new Hand(queenOf(CLUBS), kingOf(HEARTS), kingOf(DIAMONDS), aceOf(SPADES), aceOf(CLUBS)),
             // three of a kind here it is important, that no two hands can have the same
-            // cardvalue for the three cards
+            // card value for the three cards
             new Hand(twoOf(CLUBS), twoOf(HEARTS), twoOf(DIAMONDS), fourOf(SPADES), fiveOf(CLUBS)),
             new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
             new Hand(queenOf(CLUBS), kingOf(HEARTS), aceOf(DIAMONDS), aceOf(SPADES), aceOf(CLUBS)),
@@ -89,22 +89,17 @@ public class GenericHandTests {
             new Hand(sixOf(CLUBS), sevenOf(CLUBS), eightOf(CLUBS), nineOf(CLUBS), queenOf(CLUBS)),
 
             // full house here it is important, that no two full houses can have the same
-            // cardvalue for the three cards
+            // card value for the three cards
             new Hand(twoOf(CLUBS), twoOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES), threeOf(CLUBS)),
             new Hand(kingOf(CLUBS), kingOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES), fourOf(CLUBS)),
             new Hand(fiveOf(DIAMONDS), fiveOf(SPADES), fiveOf(CLUBS), fourOf(CLUBS), fourOf(HEARTS)),
             new Hand(queenOf(CLUBS), queenOf(HEARTS), aceOf(DIAMONDS), aceOf(SPADES), aceOf(CLUBS)),
-            // // four of a kind
-            // new Hand(twoOf(CLUBS), twoOf(HEARTS), twoOf(DIAMONDS), twoOf(SPADES),
-            // threeOf(CLUBS)),
-            // new Hand(twoOf(CLUBS), twoOf(HEARTS), twoOf(DIAMONDS), twoOf(SPADES),
-            // fourOf(CLUBS)),
-            // new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES),
-            // fourOf(CLUBS)),
-            // new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES),
-            // fiveOf(CLUBS)),
-            // new Hand(fourOf(CLUBS), fourOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES),
-            // fiveOf(CLUBS)),
+            // four of a kind
+            // new Hand(twoOf(CLUBS), twoOf(HEARTS), twoOf(DIAMONDS), twoOf(SPADES), threeOf(CLUBS)),
+            // new Hand(twoOf(CLUBS), twoOf(HEARTS), twoOf(DIAMONDS), twoOf(SPADES), fourOf(CLUBS)),
+            // new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES), fourOf(CLUBS)),
+            // new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES), fiveOf(CLUBS)),
+            // new Hand(fourOf(CLUBS), fourOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES), fiveOf(CLUBS)),
             // // straight flush
             // new Hand(twoOf(CLUBS), threeOf(CLUBS), fourOf(CLUBS), fiveOf(CLUBS),
             // sixOf(CLUBS)),

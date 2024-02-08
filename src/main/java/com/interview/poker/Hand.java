@@ -207,13 +207,14 @@ public class Hand {
 
     private String createStraightRankingString() {
         CardValue lastValue = null;
+        final CardValue highestValue = cards.get(0).value;
         for (Card card : cards) {
             if (lastValue != null && card.value.rank != lastValue.rank - 1) {
                 return null;
             }
             lastValue = card.value;
         }
-        return STRAIGHT_CARD_RANK + lastValue.rank;
+        return STRAIGHT_CARD_RANK + highestValue.rank;
     }
 
     private String createThreeOfAKindRankingString() {
