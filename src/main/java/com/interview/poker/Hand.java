@@ -107,8 +107,7 @@ public class Hand {
      * 
      * @param otherHand the hand to compare to
      * @return > 0 if this hand is better, 0 if they are equal, < 0 if the other
-     *         hand
-     *         is better
+     *         hand is better
      */
     public int compareToHand(final Hand otherHand) {
         return rankingString.compareTo(otherHand.rankingString);
@@ -129,7 +128,8 @@ public class Hand {
      */
     private String computeRankingString() {
         // we start with the best hand and go down to the worst, if a type of hand is
-        // found, we return the string
+        // found, we return the string, so that each check does not need to check for
+        // better hands
 
         final var straightFlushRankingString = createStraightFlushRankingString();
         if (straightFlushRankingString != null) {
@@ -226,20 +226,11 @@ public class Hand {
     }
 
     private String createThreeOfAKindRankingString() {
-        // cards with the same value follow each other, as the cards are sorted by value
-        CardValue lastValue = null;
-        int numFound = 0;
-
-        for (Card card : cards) {
-            if (card.value == lastValue) {
-                ++numFound;
-            } else {
-                lastValue = card.value;
-                numFound = 1;
-            }
-            if (numFound == 3) {
-                return THREE_OF_A_KIND_RANK + lastValue.rank;
-            }
+        if (cards.get(0).value == cards.get(2).value // first three
+                || cards.get(1).value == cards.get(3).value // middle three
+                || cards.get(2).value == cards.get(4).value) { // last three
+            // the middle card is always in the three of a kind
+            return THREE_OF_A_KIND_RANK + cards.get(2).value.rank;
         }
         return null;
     }
@@ -270,9 +261,9 @@ public class Hand {
         cardsWithoutPair.removeIf(card -> card.value == removeAllCardsWithPair1Value);
         final var removeAllCardsWithPair2Value = pair2CardValue; // final for lambda
         cardsWithoutPair.removeIf(card -> card.value == removeAllCardsWithPair2Value);
+        final var lastCardValue = cardsWithoutPair.get(0).value;
         // pair1 has higher value than pair2, as they were sorted by value
-        return TWO_PAIRS_RANK + pair1CardValue.rank + pair2CardValue.rank
-                + createHighCardRankingString(cardsWithoutPair);
+        return TWO_PAIRS_RANK + pair1CardValue.rank + pair2CardValue.rank + lastCardValue.rank;
     }
 
     private String createPairRankingString() {
