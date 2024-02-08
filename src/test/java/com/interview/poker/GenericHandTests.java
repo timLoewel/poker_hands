@@ -72,12 +72,10 @@ public class GenericHandTests {
             new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES), sixOf(CLUBS)),
             new Hand(fourOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
             new Hand(queenOf(CLUBS), kingOf(HEARTS), kingOf(DIAMONDS), aceOf(SPADES), aceOf(CLUBS)),
-            // three of a kind
+            // three of a kind here it is important, that no two hands can have the same
+            // cardvalue for the three cards
             new Hand(twoOf(CLUBS), twoOf(HEARTS), twoOf(DIAMONDS), fourOf(SPADES), fiveOf(CLUBS)),
-            new Hand(twoOf(CLUBS), twoOf(HEARTS), twoOf(DIAMONDS), threeOf(SPADES), sixOf(CLUBS)),
-            new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), fourOf(SPADES), fiveOf(CLUBS)),
-            new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), fourOf(SPADES), sixOf(CLUBS)),
-            new Hand(fourOf(CLUBS), fourOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
+            new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
             new Hand(queenOf(CLUBS), kingOf(HEARTS), aceOf(DIAMONDS), aceOf(SPADES), aceOf(CLUBS)),
             // straight
             new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
@@ -90,18 +88,12 @@ public class GenericHandTests {
             new Hand(sixOf(CLUBS), sevenOf(CLUBS), eightOf(CLUBS), nineOf(CLUBS), jackOf(CLUBS)),
             new Hand(sixOf(CLUBS), sevenOf(CLUBS), eightOf(CLUBS), nineOf(CLUBS), queenOf(CLUBS)),
 
-            
-            // // full house
-            // new Hand(twoOf(CLUBS), twoOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES),
-            // threeOf(CLUBS)),
-            // new Hand(twoOf(CLUBS), twoOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES),
-            // fourOf(CLUBS)),
-            // new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES),
-            // fourOf(CLUBS)),
-            // new Hand(fourOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), fiveOf(SPADES),
-            // fiveOf(CLUBS)),
-            // new Hand(fiveOf(CLUBS), fiveOf(HEARTS), sixOf(DIAMONDS), sixOf(SPADES),
-            // sixOf(CLUBS)),
+            // full house here it is important, that no two full houses can have the same
+            // cardvalue for the three cards
+            new Hand(twoOf(CLUBS), twoOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES), threeOf(CLUBS)),
+            new Hand(kingOf(CLUBS), kingOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES), fourOf(CLUBS)),
+            new Hand(fiveOf(DIAMONDS), fiveOf(SPADES), fiveOf(CLUBS), fourOf(CLUBS), fourOf(HEARTS)),
+            new Hand(queenOf(CLUBS), queenOf(HEARTS), aceOf(DIAMONDS), aceOf(SPADES), aceOf(CLUBS)),
             // // four of a kind
             // new Hand(twoOf(CLUBS), twoOf(HEARTS), twoOf(DIAMONDS), twoOf(SPADES),
             // threeOf(CLUBS)),

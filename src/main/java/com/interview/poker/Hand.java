@@ -63,6 +63,7 @@ public class Hand {
     private static final String THREE_OF_A_KIND_RANK = "d";
     private static final String STRAIGHT_CARD_RANK = "e";
     private static final String FLUSH_RANK = "f";
+    private static final String FULL_HOUSE_RANK = "g";
 
     /**
      * the cards in the hand, sorted by value, high to low
@@ -128,6 +129,11 @@ public class Hand {
         // we start with the best hand and go down to the worst, if a type of hand is
         // found, we return the string
 
+        final var fullHouseRankingString = createFullHouseRankingString();
+        if (fullHouseRankingString != null) {
+            return fullHouseRankingString;
+        }
+
         final var flushRankingString = createFlushRankingString();
         if (flushRankingString != null) {
             return flushRankingString;
@@ -151,6 +157,42 @@ public class Hand {
         }
 
         return createHighCardRankingString();
+    }
+
+    private String createFullHouseRankingString() {
+        // cards with the same value follow each other, as the cards are sorted by value
+        CardValue lastValue = null;
+        int numFound = 0;
+        boolean foundPair = false;
+        boolean foundThreeOfAKind = false;
+        CardValue pairCardValue = null;
+        CardValue threeOfAKindCardValue = null;
+
+        for (Card card : cards) {
+            if (card.value == lastValue) {
+                ++numFound;
+                if (numFound == 3) {
+                    foundThreeOfAKind = true;
+                    threeOfAKindCardValue = card.value;
+                    if (pairCardValue == threeOfAKindCardValue) {
+                        pairCardValue = null; // reset pair, as it is part of the three
+                        foundPair = false;
+                    }
+                } else if (numFound == 2 && !foundPair) {
+                    // if three comes after pair, we do not want to reset the pair
+                    foundPair = true;
+                    pairCardValue = card.value;
+                }
+            } else {
+                lastValue = card.value;
+                numFound = 1;
+            }
+        }
+
+        if (!foundPair || !foundThreeOfAKind) {
+            return null;
+        }
+        return FULL_HOUSE_RANK + threeOfAKindCardValue.rank;
     }
 
     private String createFlushRankingString() {
@@ -194,10 +236,7 @@ public class Hand {
         if (numFound < 3) {
             return null;
         }
-        final var cardsWithoutThreeOfAKind = new ArrayList<>(cards);
-        final var removeAllCardsWithThisValue = lastValue; // final for lambda
-        cardsWithoutThreeOfAKind.removeIf(card -> card.value == removeAllCardsWithThisValue);
-        return THREE_OF_A_KIND_RANK + lastValue.rank + createHighCardRankingString(cardsWithoutThreeOfAKind);
+        return THREE_OF_A_KIND_RANK + lastValue.rank;
     }
 
     protected String createTwoPairsRankingString() {

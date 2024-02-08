@@ -104,4 +104,5 @@ public class HandTest {
                 assertTrue(straight.isBetterThan(pairOfTwosWithKing));
 
         }
+
 }
