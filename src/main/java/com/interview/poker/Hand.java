@@ -225,19 +225,15 @@ public class Hand {
         for (Card card : cards) {
             if (card.value == lastValue) {
                 ++numFound;
-                if (numFound == 3) {
-                    break;
-                }
             } else {
                 lastValue = card.value;
                 numFound = 1;
             }
+            if (numFound == 3) {
+                return THREE_OF_A_KIND_RANK + lastValue.rank;
+            }
         }
-
-        if (numFound < 3) {
-            return null;
-        }
-        return THREE_OF_A_KIND_RANK + lastValue.rank;
+        return null;
     }
 
     protected String createTwoPairsRankingString() {
