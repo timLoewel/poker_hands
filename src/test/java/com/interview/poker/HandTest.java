@@ -1,11 +1,20 @@
 package com.interview.poker;
 
-import static com.interview.poker.Card.*;
-import static com.interview.poker.Card.CardSuit.*;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Arrays;
+import static com.interview.poker.Card.eightOf;
+import static com.interview.poker.Card.fiveOf;
+import static com.interview.poker.Card.fourOf;
+import static com.interview.poker.Card.kingOf;
+import static com.interview.poker.Card.sevenOf;
+import static com.interview.poker.Card.sixOf;
+import static com.interview.poker.Card.threeOf;
+import static com.interview.poker.Card.twoOf;
+import static com.interview.poker.Card.CardSuit.CLUBS;
+import static com.interview.poker.Card.CardSuit.DIAMONDS;
+import static com.interview.poker.Card.CardSuit.HEARTS;
+import static com.interview.poker.Card.CardSuit.SPADES;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
