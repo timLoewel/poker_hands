@@ -43,17 +43,21 @@ public class GenericHandTests {
     /**
      * a big list of hands to test
      * lower index means lower rank
+     * 
+     * for every type of hand there is a hand with the lowest possible rank and
+     * another hand with the highest possible rank
+     * 
      * For the comparison of two hands, it does not matter, if the two hands could
      * be drawn from the same deck. So several cards of the same Suit and Value are
      * allowed here.
      */
     private final static Hand[] sampleHands = {
             // high card
-            new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
             new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sevenOf(CLUBS)),
-            new Hand(threeOf(CLUBS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS), sevenOf(CLUBS)),
+            new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), eightOf(CLUBS)),
+            new Hand(threeOf(CLUBS), fourOf(DIAMONDS), fiveOf(SPADES), sevenOf(CLUBS), eightOf(CLUBS)),
             new Hand(threeOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), sixOf(SPADES), aceOf(CLUBS)),
-            new Hand(tenOf(CLUBS), jackOf(HEARTS), queenOf(DIAMONDS), kingOf(SPADES), aceOf(CLUBS)),
+            new Hand(nineOf(CLUBS), jackOf(HEARTS), queenOf(DIAMONDS), kingOf(SPADES), aceOf(CLUBS)),
             // pair
             new Hand(twoOf(CLUBS), twoOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
             new Hand(twoOf(CLUBS), twoOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sevenOf(CLUBS)),
@@ -74,18 +78,11 @@ public class GenericHandTests {
             new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), fourOf(SPADES), fiveOf(CLUBS)),
             new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), fourOf(SPADES), sixOf(CLUBS)),
             new Hand(fourOf(CLUBS), fourOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
-            new Hand(queenOf(CLUBS), kingOf(HEARTS), aceOf(DIAMONDS), aceOf(SPADES), aceOf(CLUBS))
+            new Hand(queenOf(CLUBS), kingOf(HEARTS), aceOf(DIAMONDS), aceOf(SPADES), aceOf(CLUBS)),
             // straight
-            // new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES),
-            // sixOf(CLUBS)),
-            // new Hand(threeOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), sixOf(SPADES),
-            // sevenOf(CLUBS)),
-            // new Hand(fourOf(CLUBS), fiveOf(HEARTS), sixOf(DIAMONDS), sevenOf(SPADES),
-            // eightOf(CLUBS)),
-            // new Hand(fiveOf(CLUBS), sixOf(HEARTS), sevenOf(DIAMONDS), eightOf(SPADES),
-            // nineOf(CLUBS)),
-            // new Hand(sixOf(CLUBS), sevenOf(HEARTS), eightOf(DIAMONDS), nineOf(SPADES),
-            // tenOf(CLUBS)),
+            new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
+            new Hand(threeOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), sixOf(SPADES), sevenOf(CLUBS)),
+            new Hand(tenOf(CLUBS), jackOf(HEARTS), queenOf(DIAMONDS), kingOf(SPADES), aceOf(CLUBS)),
             // // flush
             // new Hand(twoOf(CLUBS), threeOf(CLUBS), fourOf(CLUBS), fiveOf(CLUBS),
             // sixOf(CLUBS)),

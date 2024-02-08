@@ -64,6 +64,7 @@ public class Hand {
     private static final String PAIR_RANK = "b";
     private static final String TWO_PAIRS_RANK = "c";
     private static final String THREE_OF_A_KIND_RANK = "d";
+    private static final String STRAIGHT_CARD_RANK = "e";
 
     /**
      * the cards in the hand, sorted by value, high to low
@@ -122,7 +123,10 @@ public class Hand {
     protected String getRankingString() {
         // we start with the best hand and go down to the worst, if a type of hand is
         // found, we return the string
-
+        final var straightRankingString = createStraightRankingString();
+        if (straightRankingString != null) {
+            return straightRankingString;
+        }
         final var threeOfAKindRankingString = createThreeOfAKindRankingString();
         if (threeOfAKindRankingString != null) {
             return threeOfAKindRankingString;
@@ -138,6 +142,17 @@ public class Hand {
         }
 
         return createHighCardRankingString();
+    }
+
+    private String createStraightRankingString() {
+        CardValue lastValue = null;
+        for (Card card : cards) {
+            if (lastValue != null && card.value.rank != lastValue.rank - 1) {
+                return null;
+            }
+            lastValue = card.value;
+        }
+        return STRAIGHT_CARD_RANK + lastValue.rank;
     }
 
     private String createThreeOfAKindRankingString() {

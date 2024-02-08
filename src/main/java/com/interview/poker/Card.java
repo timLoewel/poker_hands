@@ -34,6 +34,7 @@ public class Card {
         CardValue(final char rank) {
             this.rank = rank;
         }
+
     }
 
     final public CardSuit suit;

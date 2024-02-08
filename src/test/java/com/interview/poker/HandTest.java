@@ -62,7 +62,7 @@ public class HandTest {
                                 fourOf(DIAMONDS),
                                 fiveOf(SPADES),
                                 sixOf(CLUBS),
-                                sevenOf(CLUBS));
+                                eightOf(CLUBS));
 
                 assertTrue(winningHand.isBetterThan(losingHand));
         }
@@ -104,4 +104,21 @@ public class HandTest {
                 assertFalse(pairOfTwosWithKing.isBetterThan(pairOfTwosWithAce));
         }
 
+        @Test
+        public void testStraightString() {
+                Hand straight = new Hand(
+                                twoOf(CLUBS),
+                                threeOf(HEARTS),
+                                fourOf(DIAMONDS),
+                                fiveOf(SPADES),
+                                sixOf(CLUBS));
+                Hand pairOfTwosWithKing = new Hand(
+                                twoOf(HEARTS),
+                                twoOf(DIAMONDS),
+                                fourOf(SPADES),
+                                fiveOf(CLUBS),
+                                kingOf(CLUBS));
+                assertTrue(straight.isBetterThan(pairOfTwosWithKing));
+
+        }
 }
