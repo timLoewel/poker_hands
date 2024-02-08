@@ -72,6 +72,11 @@ public class Hand {
     private final List<Card> cards;
 
     /**
+     * the ranking of the hand, as a string
+     */
+    private final String rankingString;
+
+    /**
      * constructor which takes 5 cards, there is no Hand with a different number of
      * cards
      */
@@ -79,6 +84,7 @@ public class Hand {
         var sortedCards = Arrays.asList(card1, card2, card3, card4, card5);
         sortedCards.sort((c1, c2) -> -c1.value.compareTo(c2.value));
         cards = sortedCards;
+        rankingString = computeRankingString();
     }
 
     /**
@@ -104,7 +110,7 @@ public class Hand {
      *         is better
      */
     public int compareToHand(final Hand otherHand) {
-        return this.getRankingString().compareTo(otherHand.getRankingString());
+        return rankingString.compareTo(otherHand.rankingString);
     }
 
     /**
@@ -120,7 +126,7 @@ public class Hand {
      * calculate the rankin string from the cards
      * 
      */
-    protected String getRankingString() {
+    private String computeRankingString() {
         // we start with the best hand and go down to the worst, if a type of hand is
         // found, we return the string
         final var straightRankingString = createStraightRankingString();
@@ -255,5 +261,9 @@ public class Hand {
 
     public String toString() {
         return cards.toString();
+    }
+
+    public String getRankingString() {
+        return rankingString;
     }
 }

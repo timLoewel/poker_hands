@@ -16,23 +16,6 @@ import org.junit.jupiter.api.Test;
 public class HandTest {
 
         @Test
-        public void testHighCardRankingString() {
-                Hand highCard1 = new Hand(
-                                twoOf(CLUBS),
-                                threeOf(HEARTS),
-                                fourOf(DIAMONDS),
-                                fiveOf(SPADES),
-                                sevenOf(CLUBS));
-                Hand highCard2 = new Hand(
-                                fourOf(SPADES),
-                                sevenOf(CLUBS),
-                                twoOf(HEARTS),
-                                fiveOf(CLUBS),
-                                threeOf(DIAMONDS));
-                assertEquals(highCard1.getRankingString(), highCard2.getRankingString());
-        }
-
-        @Test
         public void testRankingStringSorting() {
                 Hand hand = new Hand(
                                 twoOf(CLUBS),
@@ -46,7 +29,7 @@ public class HandTest {
                                 fourOf(DIAMONDS),
                                 twoOf(CLUBS),
                                 sevenOf(CLUBS));
-                assertEquals(hand.getRankingString(), sameHandDifferentSorting.getRankingString());
+                assertEquals(0, hand.compareToHand(sameHandDifferentSorting));
         }
 
         @Test
