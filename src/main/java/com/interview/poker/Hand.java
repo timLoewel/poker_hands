@@ -111,10 +111,12 @@ public class Hand {
         if (straightRankingString != null) {
             return straightRankingString;
         }
+
         final var threeOfAKindRankingString = createThreeOfAKindRankingString();
         if (threeOfAKindRankingString != null) {
             return threeOfAKindRankingString;
         }
+
         final var twoPairsRankingString = createTwoPairsRankingString();
         if (twoPairsRankingString != null) {
             return twoPairsRankingString;
