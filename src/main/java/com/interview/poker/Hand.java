@@ -245,7 +245,6 @@ public class Hand {
     }
 
     protected String createTwoPairsRankingString() {
-        // cards with the same value follow each other, as the cards are sorted by value
         CardValue lastValue = null;
         CardValue pair1CardValue = null;
         CardValue pair2CardValue = null;

@@ -70,12 +70,13 @@ public class GenericHandTests {
             new Hand(twoOf(CLUBS), twoOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES), fiveOf(CLUBS)),
             new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES), fiveOf(CLUBS)),
             new Hand(threeOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES), sixOf(CLUBS)),
-            new Hand(fourOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
+            new Hand(fourOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), sixOf(SPADES), sixOf(CLUBS)),
             new Hand(queenOf(CLUBS), kingOf(HEARTS), kingOf(DIAMONDS), aceOf(SPADES), aceOf(CLUBS)),
             // three of a kind, no two hands can have the same card value for the three
             // cards
             new Hand(twoOf(CLUBS), twoOf(HEARTS), twoOf(DIAMONDS), fourOf(SPADES), fiveOf(CLUBS)),
             new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
+            new Hand(twoOf(CLUBS), fourOf(HEARTS), fourOf(DIAMONDS), fourOf(SPADES), fiveOf(CLUBS)),
             new Hand(queenOf(CLUBS), kingOf(HEARTS), aceOf(DIAMONDS), aceOf(SPADES), aceOf(CLUBS)),
             // straight
             new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
@@ -99,7 +100,7 @@ public class GenericHandTests {
             new Hand(twoOf(CLUBS), twoOf(HEARTS), twoOf(DIAMONDS), twoOf(SPADES), threeOf(CLUBS)),
             new Hand(threeOf(CLUBS), threeOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES), fourOf(CLUBS)),
             new Hand(aceOf(CLUBS), aceOf(HEARTS), aceOf(DIAMONDS), aceOf(SPADES), kingOf(CLUBS)),
-            
+
             // straight flush
             new Hand(twoOf(CLUBS), threeOf(CLUBS), fourOf(CLUBS), fiveOf(CLUBS), sixOf(CLUBS)),
             new Hand(threeOf(HEARTS), fourOf(HEARTS), fiveOf(HEARTS), sixOf(HEARTS), sevenOf(HEARTS)),
