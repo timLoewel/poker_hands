@@ -188,19 +188,13 @@ public class Hand {
     }
 
     private String createFourOfAKindRankingString() {
-        // cards with the same value follow each other, as the cards are sorted by value
-        CardValue lastValue = null;
-        int numFound = 0;
-        for (Card card : cards) {
-            if (card.value == lastValue) {
-                ++numFound;
-            } else {
-                lastValue = card.value;
-                numFound = 1;
-            }
-            if (numFound == 4) {
-                return FOUR_OF_A_KIND_RANK + lastValue.rank;
-            }
+        if (cards.get(0).value == cards.get(3).value) {
+            // first four are the same
+            return FOUR_OF_A_KIND_RANK + cards.get(0).value.rank;
+        }
+        if (cards.get(1).value == cards.get(4).value) {
+            // last four are the same
+            return FOUR_OF_A_KIND_RANK + cards.get(1).value.rank;
         }
         return null;
     }
