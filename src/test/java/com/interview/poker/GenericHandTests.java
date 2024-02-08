@@ -83,17 +83,14 @@ public class GenericHandTests {
             new Hand(twoOf(CLUBS), threeOf(HEARTS), fourOf(DIAMONDS), fiveOf(SPADES), sixOf(CLUBS)),
             new Hand(threeOf(CLUBS), fourOf(HEARTS), fiveOf(DIAMONDS), sixOf(SPADES), sevenOf(CLUBS)),
             new Hand(tenOf(CLUBS), jackOf(HEARTS), queenOf(DIAMONDS), kingOf(SPADES), aceOf(CLUBS)),
-            // // flush
-            // new Hand(twoOf(CLUBS), threeOf(CLUBS), fourOf(CLUBS), fiveOf(CLUBS),
-            // sixOf(CLUBS)),
-            // new Hand(threeOf(CLUBS), fourOf(CLUBS), fiveOf(CLUBS), sixOf(CLUBS),
-            // sevenOf(CLUBS)),
-            // new Hand(fourOf(CLUBS), fiveOf(CLUBS), sixOf(CLUBS), sevenOf(CLUBS),
-            // eightOf(CLUBS)),
-            // new Hand(fiveOf(CLUBS), sixOf(CLUBS), sevenOf(CLUBS), eightOf(CLUBS),
-            // nineOf(CLUBS)),
-            // new Hand(sixOf(CLUBS), sevenOf(CLUBS), eightOf(CLUBS), nineOf(CLUBS),
-            // tenOf(CLUBS)),
+            // flush
+            new Hand(twoOf(CLUBS), fourOf(CLUBS), fiveOf(CLUBS), sixOf(CLUBS), sevenOf(CLUBS)),
+            new Hand(twoOf(CLUBS), fiveOf(CLUBS), sixOf(CLUBS), sevenOf(CLUBS), eightOf(CLUBS)),
+            new Hand(threeOf(CLUBS), fiveOf(CLUBS), sixOf(CLUBS), sevenOf(CLUBS), eightOf(CLUBS)),
+            new Hand(sixOf(CLUBS), sevenOf(CLUBS), eightOf(CLUBS), nineOf(CLUBS), jackOf(CLUBS)),
+            new Hand(sixOf(CLUBS), sevenOf(CLUBS), eightOf(CLUBS), nineOf(CLUBS), queenOf(CLUBS)),
+
+            
             // // full house
             // new Hand(twoOf(CLUBS), twoOf(HEARTS), threeOf(DIAMONDS), threeOf(SPADES),
             // threeOf(CLUBS)),

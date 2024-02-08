@@ -44,19 +44,16 @@ import java.util.Arrays;
  * contain a straight are ranked by their highest card.
  * 
  * Flush: Hand contains 5 cards of the same suit. Hands which are both
- * flushes
- * are ranked using the rules for High Card.
+ * flushes are ranked using the rules for High Card.
  * 
  * Full House: 3 cards of the same value, with the remaining 2 cards forming
- * a
- * pair. Ranked by the value of the 3 cards.
+ * a pair. Ranked by the value of the 3 cards.
  * 
  * Four of a kind: 4 cards with the same value. Ranked by the value of the 4
  * cards.
  * 
  * Straight flush: 5 cards of the same suit with consecutive values. Ranked
- * by
- * the highest card in the hand.
+ * by he highest card in the hand.
  */
 public class Hand {
 
@@ -65,6 +62,7 @@ public class Hand {
     private static final String TWO_PAIRS_RANK = "c";
     private static final String THREE_OF_A_KIND_RANK = "d";
     private static final String STRAIGHT_CARD_RANK = "e";
+    private static final String FLUSH_RANK = "f";
 
     /**
      * the cards in the hand, sorted by value, high to low
@@ -129,6 +127,11 @@ public class Hand {
     private String computeRankingString() {
         // we start with the best hand and go down to the worst, if a type of hand is
         // found, we return the string
+
+        final var flushRankingString = createFlushRankingString();
+        if (flushRankingString != null) {
+            return flushRankingString;
+        }
         final var straightRankingString = createStraightRankingString();
         if (straightRankingString != null) {
             return straightRankingString;
@@ -148,6 +151,16 @@ public class Hand {
         }
 
         return createHighCardRankingString();
+    }
+
+    private String createFlushRankingString() {
+        final var suit = cards.get(0).suit;
+        for (Card card : cards) {
+            if (card.suit != suit) {
+                return null;
+            }
+        }
+        return FLUSH_RANK + createHighCardRankingString();
     }
 
     private String createStraightRankingString() {
